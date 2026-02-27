@@ -28,7 +28,7 @@ def get_llm_response(conversation_history):
 
 @app.route("/")
 def index():
-    # Start a fresh conversation with the system prompt
+    # Only create a new session if one doesn't exist
     if "history" not in session:
         session["history"] = [{"role": "system", "content": SYSTEM_PROMPT}]
     return render_template("chat.html", topic=TOPIC, num_questions=len(QUESTIONS))
@@ -37,18 +37,18 @@ def index():
 @app.route("/chat", methods=["POST"])
 def chat():
     user_message = request.json.get("message", "").strip()
-    if not user_message:
-        return jsonify({"error": "Empty message"}), 400
-
-    # Add user message to history
+    
+    # 1. Add user message to history
     session["history"].append({"role": "user", "content": user_message})
 
-    # Get LLM response
+    # 2. Get response
     reply = get_llm_response(session["history"])
 
-    # Add assistant response to history
+    # 3. Add assistant response to history
     session["history"].append({"role": "assistant", "content": reply})
-    session.modified = True
+    
+    # 4. THE FIX: Force Flask to save the session memory
+    session.modified = True 
 
     return jsonify({"reply": reply})
 
