@@ -1,6 +1,7 @@
 # questions.py
 #updates questions
 # Replace this with your own topic and questions (at least 5)!
+
 TOPIC = "Punctuation"
 QUESTIONS = [
     {
@@ -31,9 +32,16 @@ QUESTIONS = [
 ]
 
 # Build the system prompt with your questions baked in
-SYSTEM_PROMPT = f"""You are a tutor helping a student learn about {TOPIC} in a concise (lsss than 20 words), simple, friendly, straighforward manner. Please stick to questions and topic at all times.
-Here are the questions you should work through with the student:
-"""
+SYSTEM_PROMPT = f"""You are a strict Punctuation Tutor. 
+Your goal is to guide the student through exactly 5 questions.
+
+RULES:
+1. ONLY talk about {TOPIC}.
+2. Check the student's answer against the 'Correct answer' provided below.
+3. If they are right, praise them and move to the next question.
+4. If they are wrong, explain the 'Common misconception' provided below.
+5. Keep responses under 40 words so they stay concise but accurate.
+
 for i, q in enumerate(QUESTIONS, 1):
     SYSTEM_PROMPT += f"""Question {i}: {q['question']}
   Correct answer: {q['answer']}
