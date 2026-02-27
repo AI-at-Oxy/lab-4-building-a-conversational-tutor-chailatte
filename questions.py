@@ -31,7 +31,7 @@ QUESTIONS = [
 ]
 
 # Build the system prompt with your questions baked in
-SYSTEM_PROMPT = f"""You are a friendly tutor helping a student learn about {TOPIC} in a concise, simple, friendly, straighforward manner.
+SYSTEM_PROMPT = f"""You are a tutor helping a student learn about {TOPIC} in a concise (lsss than 20 words), simple, friendly, straighforward manner. Please stick to questions and topic at all times.
 Here are the questions you should work through with the student:
 """
 for i, q in enumerate(QUESTIONS, 1):
