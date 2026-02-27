@@ -19,6 +19,7 @@ def get_llm_response(conversation_history):
             messages=conversation_history,
             api_base=API_BASE,
             temperature=0.1,
+            stop=["User:", "### User:", "\nUser:"]
         )
         return response.choices[0].message.content
     except Exception as e:
