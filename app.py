@@ -29,7 +29,8 @@ def get_llm_response(conversation_history):
 @app.route("/")
 def index():
     # Start a fresh conversation with the system prompt
-    session["history"] = [{"role": "system", "content": SYSTEM_PROMPT}]
+    if "history" not in session:
+        session["history"] = [{"role": "system", "content": SYSTEM_PROMPT}]
     return render_template("chat.html", topic=TOPIC, num_questions=len(QUESTIONS))
 
 
