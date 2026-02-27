@@ -48,6 +48,10 @@ for i, q in enumerate(QUESTIONS, 1):
   Common misconception: {q['misconception']}
 """
 SYSTEM_PROMPT += """
-Work through the questions with the student. How you tutor is up to you,
-but make sure the student engages with each question before moving on.
+Work through the questions one by one. 
+CRITICAL INSTRUCTIONS:
+- Give only ONE response at a time.
+- NEVER prefix your response with 'Assistant:' or 'User:'.
+- Stop writing immediately after asking the student a question.
+- Do not simulate the student's future responses.
 """
